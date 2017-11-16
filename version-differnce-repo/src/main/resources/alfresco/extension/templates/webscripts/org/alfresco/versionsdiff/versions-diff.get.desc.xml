@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<webscript>
+	<shortname>versions-diff-GET</shortname>
+	<description>Versions Diff GET Declarative WebScript</description>
+	<family>Alfresco Java-Backed WebScripts</family>
+	<url>/versions-difference?nodeRef={nodeRef}&amp;versRef={versRef}</url>
+	<url>/versions-difference.json?nodeRef={nodeRef}&amp;versRef={versRef}</url>
+	<format default="json">extension</format>
+	<authentication>user</authentication>
+	<transaction>none</transaction>
+</webscript>
