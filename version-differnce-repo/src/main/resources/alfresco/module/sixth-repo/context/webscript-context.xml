@@ -16,11 +16,16 @@
 	limitations under the License.
 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="webscript.alfresco.tutorials.helloworld.get"
+		  class="com.eisenvault.sixth_repo.platformsample.HelloWorldWebScript"
+		  parent="webscript">
+	</bean>
 
-   
+
+
 	<!-- Registration of the VersionsDifferenceWebscript.java -->	
      <bean id="webscript.org.alfresco.versionsdiff.versions-diff.get"
           class="org.alfresco.module.versionsdiff.VersionsDifferenceWebscript" parent="webscript">
@@ -28,5 +33,6 @@
             <ref bean="ServiceRegistry"/>
         </property>
     </bean>
-    
+
+
 </beans>

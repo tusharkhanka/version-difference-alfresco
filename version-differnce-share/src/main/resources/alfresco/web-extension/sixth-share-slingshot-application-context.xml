@@ -14,18 +14,18 @@
    -->
 
    <!-- Add module specific messages and labels -->
-   <bean id="version-differnce-share.resources"
+   <bean id="sixth-share.resources"
          class="org.springframework.extensions.surf.util.ResourceBundleBootstrapComponent">
       <property name="resourceBundles">
          <list>
-            <value>alfresco.web-extension.messages.version-differnce-share</value>
+            <value>alfresco.web-extension.messages.sixth-share</value>
          </list>
       </property>
    </bean>
 
-
-
-
     <bean id="alfresco.subcomponent.evaluator.versionsdiff.checkMimetype" 
           class="org.alfresco.cms.documentlibrary.evaluator.MimetypeSubComponentEvaluator"/>
+
+
+
 </beans>

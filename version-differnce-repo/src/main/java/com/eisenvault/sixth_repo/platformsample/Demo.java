@@ -1,4 +1,4 @@
-package com.eisenvault.version_differnce_repo.platformsample;
+package com.eisenvault.sixth_repo.platformsample;
 
 /**
  * This class does nothing except dump some output to <i>system.out</i>.

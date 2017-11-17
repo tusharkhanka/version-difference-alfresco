@@ -1,4 +1,4 @@
-<#--
+<import resource="classpath:/alfresco/templates/org/alfresco/import/alfresco-util.js">
 /**
  * Copyright (C) 2005-2012 Alfresco Software Limited.
  *
@@ -40,27 +40,24 @@
  *  If not, see <http://www.gnu.org/licenses/>.
  *
  *  Author  Marco Scapoli  <rianko@gmail.com>
- *  File    versions-diff.get.ftl
+ *  File    document-versions-diff.get.js
  **/
--->
 
+function main()
 {
-"message" : [
-    <#if result??>
-        <#list result as res>
-            {   
-                "operation" : "${res[0]}" ,
-      
-                "content" : "${res[1]}"
-            }
-            <#if res_has_next>, </#if>
-        </#list>
-    <#else>
-            {   
-                "operation" : "EQUAL" ,
-      
-                "content" : "ERROR"
-            }
-    </#if>
-    ]
+   AlfrescoUtil.param('nodeRef');
+   AlfrescoUtil.param('site', null);
+   AlfrescoUtil.param('container', 'documentLibrary');
+   var documentDetails = AlfrescoUtil.getNodeDetails(model.nodeRef, model.site);
+   if (documentDetails)
+   {
+      var userPermissions = documentDetails.item.node.permissions.user;
+      model.allowNewVersionUpload = (userPermissions["Write"] && userPermissions["Delete"]) || false;
+      if (documentDetails.workingCopy && documentDetails.workingCopy.workingCopyVersion)
+      {
+         model.workingCopyVersion = documentDetails.workingCopy.workingCopyVersion;
+      }
+   }
 }
+
+main();

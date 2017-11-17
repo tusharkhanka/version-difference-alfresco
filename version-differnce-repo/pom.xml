@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.eisenvault</groupId>
-    <artifactId>version-differnce-repo</artifactId>
+    <artifactId>sixth-repo</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>version-differnce-repo Platform Jar Module - SDK 3</name>
+    <name>sixth-repo Platform Jar Module - SDK 3</name>
     <description>Platform JAR Module (to be included in the alfresco.war) - SDK 3</description>
     <packaging>jar</packaging>
 
@@ -102,11 +102,7 @@
             <version>4.5.2</version>
             <scope>test</scope>
         </dependency>
-	<dependency>
-	    <groupId>org.alfresco.surf</groupId>
-	    <artifactId>spring-webscripts-api</artifactId>
-	    <version>6.13</version>
-	</dependency>
+
     </dependencies>
 
     <build>
@@ -173,7 +169,7 @@
                 the layout of your AMP. The end result is that Maven will produce both a JAR file and an AMP with your
                 module.
             -->
-            
+            <!--
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.6</version>
@@ -198,7 +194,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            
+            -->
 
             <!-- Hot reloading with JRebel -->
             <plugin>

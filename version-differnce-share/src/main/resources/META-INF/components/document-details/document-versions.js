@@ -16,6 +16,31 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Alfresco. If not, see <http://www.gnu.org/licenses/>.
  */
+ 
+/**
+ * Copyright (C) 2012 Marco Scapoli
+ *
+ * This file is part of Versions Difference Alfresco Plug-in.
+ *
+ *  Versions Difference Alfresco Plug-in is free software: you can redistribute 
+ *  it and/or modify
+ *  it under the terms of the GNU Lesser General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  Versions Difference Alfresco Plug-in is distributed in the hope
+ *  that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Versions Difference Alfresco Plug-in.
+ *  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  Author  Marco Scapoli  <rianko@gmail.com>
+ *  File    document-versions-diff-custom.js
+ **/
 
 /**
  * Document Details Version component.
@@ -146,7 +171,7 @@
          {
             dataSource:
             {
-               url: this.dataSourceURLStem + "?nodeRef=" + this.options.nodeRef,
+               url: Alfresco.constants.PROXY_URI + "api/version?nodeRef=" + this.options.nodeRef,
                doBeforeParseData: this.bind(function(oRequest, oFullResponse)
                {
                   // Versions are returned in an array but must be placed in an object to be able to be parse by yui
@@ -238,7 +263,7 @@
          html += '   <span class="document-version">' + $html(doc.label) + '</span>';
          html += '</div>';
          html += '<div class="version-panel-right">';
-         html += '   <h3 class="thin dark">' + $html(doc.name) +  '</h3>';
+         html += '   <h3 class="thin dark" style="width:' + (Dom.getViewportWidth() * 0.25) + 'px;">' + $html(doc.name) +  '</h3>';
          html += '   <span class="actions">';
          if (this.options.allowNewVersionUpload)
          {
@@ -390,30 +415,34 @@
          if (complete.failed.length == 0 && complete.successful.length > 0)
          {
             // No activities in Repository mode
-            if (this.options.siteId == null || this.options.siteId.length == 0)
+            if (this.options.siteId != null && this.options.siteId.length != 0)
             {
-               return;
+               try
+               {
+                  Alfresco.util.Ajax.jsonPost(
+                  {
+                     url: Alfresco.constants.PROXY_URI + "slingshot/doclib/activity",
+                     dataObj:
+                     {
+                        fileName: complete.successful[0].fileName,
+                        nodeRef: complete.successful[0].nodeRef,
+                        site: this.options.siteId,
+                        type: "file-updated",
+                        page: "document-details"
+                     }
+                  });
+               }
+               catch (e)
+               {
+                  // Ignore, not important enough to bother user about
+               }
             }
 
-            try
+            // ALF-13561 fix, refresh page using correct nodeRef
+            YAHOO.lang.later(0, this, function()
             {
-               Alfresco.util.Ajax.jsonPost(
-               {
-                  url: Alfresco.constants.PROXY_URI + "slingshot/doclib/activity",
-                  dataObj:
-                  {
-                     fileName: complete.successful[0].fileName,
-                     nodeRef: complete.successful[0].nodeRef,
-                     site: this.options.siteId,
-                     type: "file-updated",
-                     page: "document-details"
-                  }
-               });
-            }
-            catch (e)
-            {
-               // Ignore, not important enough to bother user about
-            }
+               window.location = window.location.href.split("?")[0] + "?nodeRef=" + complete.successful[0].nodeRef;
+            });
          }
       },
 

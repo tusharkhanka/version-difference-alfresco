@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.eisenvault</groupId>
-    <artifactId>version-differnce-share</artifactId>
+    <artifactId>sixth-share</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>version-differnce-share Share Jar Module - SDK 3</name>
+    <name>sixth-share Share Jar Module - SDK 3</name>
     <description>Share JAR Module (to be included in the share.war) - SDK 3</description>
     <packaging>jar</packaging>
 
@@ -57,15 +57,16 @@
             <version>${alfresco.surf.version}</version>
             <scope>provided</scope>
         </dependency>
+    
 
-	<dependency>
-    		<groupId>javax.servlet</groupId>
-    		<artifactId>javax.servlet-api</artifactId>
-	    	<version>3.1.0</version>
-    		<scope>provided</scope>
-	</dependency>
-    </dependencies>
 
+		<dependency>
+    			<groupId>javax.servlet</groupId>
+    			<artifactId>javax.servlet-api</artifactId>
+		    	<version>3.1.0</version>
+    			<scope>provided</scope>
+		</dependency>
+	</dependencies>
     <build>
         <plugins>
             <!--

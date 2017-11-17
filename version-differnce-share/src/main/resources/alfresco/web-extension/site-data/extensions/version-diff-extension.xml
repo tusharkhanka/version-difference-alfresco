@@ -1,5 +1,6 @@
-<#--
-/**
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- 
+/*
  * Copyright (C) 2005-2012 Alfresco Software Limited.
  *
  * This file is part of Alfresco
@@ -18,7 +19,7 @@
  * along with Alfresco. If not, see <http://www.gnu.org/licenses/>.
  */
  
-/**
+ /*
  * Copyright (C) 2012 Marco Scapoli
  *
  * This file is part of Versions Difference Alfresco Plug-in.
@@ -40,27 +41,36 @@
  *  If not, see <http://www.gnu.org/licenses/>.
  *
  *  Author  Marco Scapoli  <rianko@gmail.com>
- *  File    versions-diff.get.ftl
+ *  File    version-diff-extension.xml
  **/
--->
+ -->
 
-{
-"message" : [
-    <#if result??>
-        <#list result as res>
-            {   
-                "operation" : "${res[0]}" ,
-      
-                "content" : "${res[1]}"
-            }
-            <#if res_has_next>, </#if>
-        </#list>
-    <#else>
-            {   
-                "operation" : "EQUAL" ,
-      
-                "content" : "ERROR"
-            }
-    </#if>
-    ]
-}
+<extension>
+    <modules>
+        <module>
+            <id>Document Versions Diff :: Panel Replacer Module</id>
+            <evaluator type="default.extensibility.evaluator" />
+            <components>
+                <!-- Replace Document Versions Panel with Document Versions Diff Panel -->
+                <component>
+                    <scope>template</scope>
+                    <region-id>document-versions</region-id>
+                    <source-id>document-details</source-id>
+                    <sub-components>
+                        <sub-component id="default">
+                            <evaluations>
+                                <evaluation id="replaceVersionsHistory">
+                                    <evaluators>    
+                                        <evaluator type= "alfresco.subcomponent.evaluator.versionsdiff.checkMimetype" ></evaluator>                                
+                                    </evaluators>
+                                    <url>/components/document-details/document-versions-diff</url>  
+                                    <render>true</render>
+								</evaluation>
+							</evaluations>
+						</sub-component>
+					</sub-components>
+				</component>
+			</components>
+		</module>
+	</modules>
+</extension>

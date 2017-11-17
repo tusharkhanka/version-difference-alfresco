@@ -8,7 +8,7 @@
 		 workflow, and loading custom content models.  -->
 
     <!-- Registration of new models -->
-    <bean id="version-differnce-repo.dictionaryBootstrap" parent="dictionaryModelBootstrap" depends-on="dictionaryBootstrap">
+    <bean id="sixth-repo.dictionaryBootstrap" parent="dictionaryModelBootstrap" depends-on="dictionaryBootstrap">
         <property name="models">
             <list>
                 <value>alfresco/module/${project.artifactId}/model/content-model.xml</value>
@@ -23,7 +23,7 @@
         </property>
     </bean>
 
-    <bean id="com.eisenvault.version_differnce_repo.sampleprocess.workflowBootstrap" parent="workflowDeployer">
+    <bean id="com.eisenvault.sixth_repo.sampleprocess.workflowBootstrap" parent="workflowDeployer">
         <property name="workflowDefinitions">
             <list>
                 <props>

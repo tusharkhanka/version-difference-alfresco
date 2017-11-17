@@ -1,5 +1,7 @@
-<#--
-/**
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- 
+/*
  * Copyright (C) 2005-2012 Alfresco Software Limited.
  *
  * This file is part of Alfresco
@@ -18,7 +20,7 @@
  * along with Alfresco. If not, see <http://www.gnu.org/licenses/>.
  */
  
-/**
+ /*
  * Copyright (C) 2012 Marco Scapoli
  *
  * This file is part of Versions Difference Alfresco Plug-in.
@@ -40,27 +42,12 @@
  *  If not, see <http://www.gnu.org/licenses/>.
  *
  *  Author  Marco Scapoli  <rianko@gmail.com>
- *  File    versions-diff.get.ftl
+ *  File    document-versions-diff.get.desc.xml
  **/
--->
+ -->
 
-{
-"message" : [
-    <#if result??>
-        <#list result as res>
-            {   
-                "operation" : "${res[0]}" ,
-      
-                "content" : "${res[1]}"
-            }
-            <#if res_has_next>, </#if>
-        </#list>
-    <#else>
-            {   
-                "operation" : "EQUAL" ,
-      
-                "content" : "ERROR"
-            }
-    </#if>
-    ]
-}
+<webscript>
+	<shortname>document-details-versions</shortname>
+	<description>Document Details Versions Component</description>
+	<url>/components/document-details/document-versions-diff</url>
+</webscript>

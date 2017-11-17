@@ -1,4 +1,3 @@
-<#--
 /**
  * Copyright (C) 2005-2012 Alfresco Software Limited.
  *
@@ -40,27 +39,21 @@
  *  If not, see <http://www.gnu.org/licenses/>.
  *
  *  Author  Marco Scapoli  <rianko@gmail.com>
- *  File    versions-diff.get.ftl
+ *  File    versions-diff-hook.get.js
  **/
--->
 
+var connector = remote.connect("alfresco");
+if(null == page.url.args.nodeRef || null == page.url.args.versRef)
 {
-"message" : [
-    <#if result??>
-        <#list result as res>
-            {   
-                "operation" : "${res[0]}" ,
-      
-                "content" : "${res[1]}"
-            }
-            <#if res_has_next>, </#if>
-        </#list>
-    <#else>
-            {   
-                "operation" : "EQUAL" ,
-      
-                "content" : "ERROR"
-            }
-    </#if>
-    ]
+	var data = null;
+}else{
+	var data = connector.get("/versions-diff.json?nodeRef=" + page.url.args.nodeRef + "&versRef=" + page.url.args.versRef);	
+}
+// Create a json object from data variable
+if(null == data)
+{
+	model.result = jsonUtils.toObject({'msg' : 'Cannot resolve versions-diff-hook passed url'});
+}else{
+	var array = jsonUtils.toObject(data);
+	model.result = array["message"];
 }

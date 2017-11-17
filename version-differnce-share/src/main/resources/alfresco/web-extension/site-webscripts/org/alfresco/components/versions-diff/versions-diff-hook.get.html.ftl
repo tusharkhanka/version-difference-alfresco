@@ -40,27 +40,13 @@
  *  If not, see <http://www.gnu.org/licenses/>.
  *
  *  Author  Marco Scapoli  <rianko@gmail.com>
- *  File    versions-diff.get.ftl
+ *  File    versions-diff-hook.get.html.ftl
  **/
 -->
-
-{
-"message" : [
-    <#if result??>
-        <#list result as res>
-            {   
-                "operation" : "${res[0]}" ,
-      
-                "content" : "${res[1]}"
-            }
-            <#if res_has_next>, </#if>
-        </#list>
-    <#else>
-            {   
-                "operation" : "EQUAL" ,
-      
-                "content" : "ERROR"
-            }
-    </#if>
-    ]
-}
+<br />
+<br />
+<#if result??>
+    <#list result as res>
+            <span class="${res.operation?html}">${res.content?html}</span>
+    </#list>
+</#if>

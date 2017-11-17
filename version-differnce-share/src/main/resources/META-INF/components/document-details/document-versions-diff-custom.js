@@ -16,6 +16,31 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Alfresco. If not, see <http://www.gnu.org/licenses/>.
  */
+ 
+/**
+ * Copyright (C) 2012 Marco Scapoli
+ *
+ * This file is part of Versions Difference Alfresco Plug-in.
+ *
+ *  Versions Difference Alfresco Plug-in is free software: you can redistribute 
+ *  it and/or modify
+ *  it under the terms of the GNU Lesser General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  Versions Difference Alfresco Plug-in is distributed in the hope
+ *  that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Versions Difference Alfresco Plug-in.
+ *  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  Author  Marco Scapoli  <rianko@gmail.com>
+ *  File    document-versions-diff-custom.js
+ **/
 
 /**
  * Document Details Version component.
@@ -120,15 +145,7 @@
        * @type {Object} XHR response object
        */
       versionCache: null,
-
-      /**
-       * The data source URL stem
-       *
-       * @property dataSourceURLStem
-       * @type string
-       */
-      dataSourceURLStem: Alfresco.constants.PROXY_URI + "api/version",
-
+      
       /**
        * Fired by YUI when parent element is available for scripting
        *
@@ -136,12 +153,6 @@
        */
       onReady: function DocumentVersions_onReady()
       {
-         var containerElement = Dom.get(this.id + "-olderVersions");
-         if (!containerElement)
-         {
-            return;
-         }
-
          this.widgets.alfrescoDataTable = new Alfresco.util.DataTable(
          {
             dataSource:
@@ -176,39 +187,6 @@
                }
             }
          });
-
-         this.widgets.alfrescoDataTable.getDataTable().subscribe("renderEvent", function()
-         {
-            this.resizeHistoryDetails();
-         }, this, this);
-
-         Event.addListener(window, "resize", function()
-         {
-            this.resizeHistoryDetails();
-         }, this, true);
-      },
-
-      /**
-       * Resize Event handler to resize the version history comment area dynamically
-       * See MNT-9909 - to handle long comments without breaks in words.
-       */
-      resizeHistoryDetails: function DocumentVersions_resizeHistoryDetails()
-      {
-         // adjusts the filename container DIV to a size relative to the container width
-         var width = (Dom.getViewportWidth() * 0.25) + "px",
-             nodes = YAHOO.util.Selector.query('h3.thin', this.id + "-body");
-         for (var i=0; i<nodes.length; i++)
-         {
-            nodes[i].style.width = width;
-         }
-
-         // adjusts the version comment container DIV to a size relative to the container width
-         width = (Dom.getViewportWidth() * 0.25 - 40) + "px",
-         nodes = YAHOO.util.Selector.query('div.version-details-right', this.id + "-body");
-         for (var i=0; i<nodes.length; i++)
-         {
-            nodes[i].style.width = width;
-         }
       },
 
       /**
@@ -300,11 +278,6 @@
          {
             text: this.msg("message.revertComplete")
          });
-
-         // MNT-9235: Firing this event, because 'Alfresco.WebPreview' module
-         // is isolated and this action modifies content of current node
-         // without reloading of the page (ALF-6621)...
-         YAHOO.Bubbling.fire("previewChangedEvent");
 
          // Fire metadatarefresh so components may refresh themselves
          YAHOO.Bubbling.fire("metadataRefresh", {});
