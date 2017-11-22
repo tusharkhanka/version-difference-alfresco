@@ -23,16 +23,4 @@
 		  class="com.eisenvault.sixth_repo.platformsample.HelloWorldWebScript"
 		  parent="webscript">
 	</bean>
-
-
-
-	<!-- Registration of the VersionsDifferenceWebscript.java -->	
-     <bean id="webscript.org.alfresco.versionsdiff.versions-diff.get"
-          class="org.alfresco.module.versionsdiff.VersionsDifferenceWebscript" parent="webscript">
-        <property name="serviceRegistry">
-            <ref bean="ServiceRegistry"/>
-        </property>
-    </bean>
-
-
 </beans>

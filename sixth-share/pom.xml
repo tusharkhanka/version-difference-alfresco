@@ -57,16 +57,15 @@
             <version>${alfresco.surf.version}</version>
             <scope>provided</scope>
         </dependency>
-    
+	<!-- dependency for version differnce -->
+	<dependency>
+  		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+	    	<version>3.1.0</version>
+    		<scope>provided</scope>
+	</dependency>
+    </dependencies>
 
-
-		<dependency>
-    			<groupId>javax.servlet</groupId>
-    			<artifactId>javax.servlet-api</artifactId>
-		    	<version>3.1.0</version>
-    			<scope>provided</scope>
-		</dependency>
-	</dependencies>
     <build>
         <plugins>
             <!--

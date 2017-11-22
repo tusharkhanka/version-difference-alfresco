@@ -37,7 +37,6 @@
         <property name="nodeLocatorService" ref="nodeLocatorService" />
     </bean>
 
-    
 
 	<!-- Registration of the VersionsDifferenceWebscript.java -->	
      <bean id="webscript.org.alfresco.versionsdiff.versions-diff.get"
@@ -46,6 +45,7 @@
             <ref bean="ServiceRegistry"/>
         </property>
     </bean>
+
 
 
 </beans>
