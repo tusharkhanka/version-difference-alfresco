@@ -48,7 +48,7 @@
       options:
       {
          /**
-          * Reference to the current document
+          * Reference to the current document edit 3
           *
           * @property nodeRef
           * @type string
@@ -78,6 +78,14 @@
           * @type string
           */
          workingCopyVersion: null,
+
+         /**
+          * Reference to the current document
+          *
+          * @property versRef
+          * @type string
+          */
+         versRef: null,
 
          /**
           * Tells if the user may upload a new version or revert the document.
@@ -119,14 +127,14 @@
        */
       onReady: function DocumentVersions_onReady()
       {
-         var containerElement = Dom.get(this.id + "-olderVersions");
-         if (!containerElement)
-         {
-            return;
-         }
-
          this.widgets.alfrescoDataTable = new Alfresco.util.DataTable(
          {
+         //var containerElement = Dom.get(this.id + "-olderVersions");
+         //if (!containerElement)
+         //{
+         //   return;
+         //} edit 2
+
             dataSource:
             {
                url: Alfresco.constants.PROXY_URI + "api/version?nodeRef=" + this.options.nodeRef,
@@ -214,7 +222,7 @@
       {
     	 //New variable declaration for Versions Diff page URL construction
 //    	 var versionsDiffURL = Alfresco.constants.URL_PAGECONTEXT + 'site/' + this.options.siteId +'/versions-difference?nodeRef=' + this.options.nodeRef + '&amp;versRef=' + doc.nodeRef;
-    	 var versionsDiffURL = Alfresco.constants.URL_PAGECONTEXT +'/versions-difference?nodeRef=' + this.options.nodeRef + '&amp;versRef=' + doc.nodeRef;
+    	 var versionsDiffURL = Alfresco.constants.URL_PAGECONTEXT + 'versions-difference?nodeRef=' + this.options.nodeRef + '&amp;versRef=' + doc.nodeRef;
     	 var downloadURL = Alfresco.constants.PROXY_URI + '/api/node/content/' + doc.nodeRef.replace(":/", "") + '/' + doc.name + '?a=true',
             html = '';
 
@@ -230,7 +238,7 @@
          }
          html += '      <a href="' + downloadURL + '" class="download" title="' + this.msg("label.download") + '">&nbsp;</a>';
          html += '		<a href="#" name=".onViewHistoricPropertiesClick" rel="' + doc.nodeRef + '" class="' + this.id + ' historicProperties" title="' + this.msg("label.historicProperties") + '">&nbsp;</a>';
-         html += '      <a href="' + versionsDiffURL + '" class="' + this.id + ' versionsDiff" title="' + this.msg("label.versionsDiff") + '">&nbsp;</a>'; //Versions Diff new action
+         html += '      <a href="#" name=".onVersionClick" rel="' + versionsDiffURL + '" class="' + this.id + ' versionsDiff" title="' + this.msg("label.versionsDiff") + '">&nbsp;</a>'; //Versions Diff new action
          html += '   </span>';
          html += '   <div class="clear"></div>';
          html += '   <div class="version-details">';
@@ -316,6 +324,23 @@
       },
 
 
+      /**
+       * Called when a "onVersionClick" link has been clicked for a version.
+       * Will display the Properties dialogue for that version.
+       * 
+       * @method onVersionClick
+       * @param version
+       */
+      onVersionClick: function DocumentVersions_onVersionClick(versionsDiffURL)
+      {
+
+         //Versions Diff new action
+
+        var win = window.open(versionsDiffURL);  ///similar to above solution
+	 win.focus();
+      },
+
+
 
       /**
        * Called when the "onUploadNewVersionClick" link has been clicked.
@@ -397,7 +422,7 @@
                }
             }
 
-            // ALF-13561 fix, refresh page using correct nodeRef
+            // ALF-13561 fix, refresh page using correct nodeRef edit1
             YAHOO.lang.later(0, this, function()
             {
                window.location = window.location.href.split("?")[0] + "?nodeRef=" + complete.successful[0].nodeRef;

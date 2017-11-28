@@ -35,7 +35,7 @@
 
 .document-versions .actions {
 	float: right;
-	width: 5em;
+	width: 17em;
 	text-align: right;
 }
 
@@ -63,7 +63,6 @@
 }
 
 .document-versions .actions a.versionsDiff {
-	padding-bottom: 1em;
 	background-image: url(images/versions-diff-ico-16.png);
 }
 
