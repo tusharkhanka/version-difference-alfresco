@@ -23,15 +23,5 @@
         </property>
     </bean>
 
-    <bean id="com.eisenvault.sixth_repo.sampleprocess.workflowBootstrap" parent="workflowDeployer">
-        <property name="workflowDefinitions">
-            <list>
-                <props>
-                    <prop key="engineId">activiti</prop>
-                    <prop key="location">alfresco/module/${project.artifactId}/workflow/sample-process.bpmn20.xml</prop>
-                    <prop key="mimetype">text/xml</prop>
-                </props>
-            </list>
-        </property>
-    </bean>
+
 </beans>
