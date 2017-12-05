@@ -57,7 +57,7 @@ if(null == data)
 	
 	var array = jsonUtils.toObject(data);
 	if (array == null){
-		var data2 = '{"message" : [ {"operation" : "EQUAL" , "content" : "This file has an image content or an Optical character recognized(OCR) file. Cannot resolve Versions Difference for this type of file"}]}'
+		var data2 = '{"message" : [ {"operation" : "EQUAL" , "content" : "Unable to display version difference for this file"}]}'
 		var array2 = jsonUtils.toObject(data2);
 		model.result = array2["message"];
 		}

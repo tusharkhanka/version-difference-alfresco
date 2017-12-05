@@ -220,7 +220,7 @@ public class VersionsDifferenceWebscript extends DeclarativeWebScript
                     {
                     }
                 }
-                return "This file has an image content or an Optical character recognized(OCR) file. Cannot resolve Versions Difference for this type of file";
+                return "Unable to display version difference for this file";
             }
         return "Content Reader fail";
     }
