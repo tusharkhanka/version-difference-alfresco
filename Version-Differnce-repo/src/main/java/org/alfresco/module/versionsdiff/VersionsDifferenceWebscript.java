@@ -198,15 +198,21 @@ public class VersionsDifferenceWebscript extends DeclarativeWebScript
 
                     try
                     {
-                        transformer.transform(reader, writer);
-                        // point the reader to the new-written content
-                        reader = writer.getReader();
+                        if (null != writer)
+                        {
+                        	transformer.transform(reader, writer);
+                        	logger.error("writer is not null");
+                        	// point the reader to the new-written content
+                        	reader = writer.getReader();}
                         // Check that the reader is a view onto something concrete
                         if (!reader.exists())
                         {
+                        	logger.error("no reader exists");
                             throw new ContentIOException("The transformation did not write any content, yet: \n" + "   transformer:     " + transformer + "\n" + "   temp writer:     " + writer);
                         }else{
-                            return reader.getContentString();
+                        	logger.error("returned string");
+                        	return reader.getContentString();
+                            
                         }
                         
                     }
@@ -214,7 +220,7 @@ public class VersionsDifferenceWebscript extends DeclarativeWebScript
                     {
                     }
                 }
-                return "No trasformer for this type of File";
+                return "This file has an image content or an Optical character recognized(OCR) file. Cannot resolve Versions Difference for this type of file";
             }
         return "Content Reader fail";
     }

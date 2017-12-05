@@ -54,6 +54,14 @@ if(null == data)
 {
 	model.result = jsonUtils.toObject({'msg' : 'Cannot resolve versions-diff-hook passed url'});
 }else{
+	
 	var array = jsonUtils.toObject(data);
-	model.result = array["message"];
+	if (array == null){
+		var data2 = '{"message" : [ {"operation" : "EQUAL" , "content" : "This file has an image content or an Optical character recognized(OCR) file. Cannot resolve Versions Difference for this type of file"}]}'
+		var array2 = jsonUtils.toObject(data2);
+		model.result = array2["message"];
+		}
+	else {
+		model.result = array["message"];
+		}
 }
